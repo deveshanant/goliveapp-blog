@@ -1,0 +1,20 @@
+1/ I wrote a little bit about how to do deployment updates without serving errors in #Kubernetes. Since I don't have a blog, I'll just tweet.
+You have some pods, and maybe a load-balancer, too. You want to update the deployment. How to do this "best" in K8s today?
+2/ You want to 1) start sending traffic to new pods; 2) stop sending new traffic to old (being deleted); 3) allow existing traffic to old pods to finish (drain).
+I'll assume you set Deployment maxSurge and maxUnavailable to allow at least 1 new pod before removing old ones.
+3/ So now that you have at least 1 new pod ready, it's time to cull at least 1 old pod. Remember, this is Kubernetes, so it's almost all asynchronous. When you DELETE a pod, multiple things happen roughly at the same time, but really it's in whatever order is worst for you.
+4/ 1) Kubelet observes the pod's deletionTimestamp being set, and starts the end-of-life process. Usually this means sending SIGTERM, but it could also involve a preStop handler of your choice.
+5/ 2) Endpoints are updated to either remove the pod or mark it unready (depending on Endpoints vs. EndpointSlice). This itself causes another round of async things to happen.
+6/ 3) The kube-proxy (or equivalent) on each node observes the endpoints changing, and programs the data-plane. Usually this means "don't send any more connections", but the implementations vary quite a lot.
+7/ 4) External things which track endpoints (like load-balancer NEGs on GCP) are updated to stop sending new connections. These things tend to be much slower than in-cluster data-plane programming, and there can be an arbitrary number of them.
+8/ I feel the need to reiterate - all of these happen completely async to almost all the others (there's some causality in there but not much).
+There is very little "before" or "after" that is guaranteed.
+9/ Somewhere in there, your pod receives a SIGTERM. The "obvious" thing to do is stop accepting new connections, right?
+Yeah, don't do that. You might get that SIGTERM before kube-proxies and/or LBs are updated! They could still be sending you traffic, and you will reject it.
+10/ While Kubernetes has "finalizers", we do not distinguish "delete requested" from "delete acknowledged by all parties", only "delete started" and "delete finished". Once deletionTimestamp is set, a (wall) clock is ticking.
+11/ You want to drain existing connections, but need to still accept new ones! Proxies/LBs will (usually) remove the pod "soon", and new traffic will tail off. Existing connections can complete within the pod's grace period (you did set that, right?) and then your pod will die.
+12/ I know it's not super satisfying. We want a deterministic answer, but I hope you can now reason through why this is hard. You can explore more by emulating the "better" process.
+13/ Before you delete the pod, change its labels so it no longer matches the service. Now wait for all the nodes to update their iptables/ebpf/ipvs/... A lone straggler means you have to wait. I hope none of your nodes are crashed - that could take a while.
+14/ Also wait for all external observers to "finish". This can take arbitrarily long and there can be an arbitrary number of them. Also, you might not know about all of them, but I'm reasonable, so let's assume you do.
+15/ Only once that is all done can you actually delete the pod.
+If you HAVE TO stop accepting on SIGTERM (e.g. using a 3rd party thing - nginx, I'm looking at you), you can use a "sleep" in lifecycle.preStop. To borrow a phrase - it's janky, but it's battle hardened jank.
