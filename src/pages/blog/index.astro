@@ -1,0 +1,21 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<Base title="Blog — GoLiveApp">
+  <h1 style="margin-bottom:2rem; font-size:1.8rem; color:#fff;">All Posts</h1>
+  <ul style="list-style:none;">
+    {posts.map(post => (
+      <li style="padding:1.25rem 0; border-bottom:1px solid var(--border);">
+        <a href={`/blog/${post.slug}`} style="text-decoration:none; color:var(--text);">
+          <h2 style="font-size:1.1rem; color:#fff; margin-bottom:0.3rem;">{post.data.title}</h2>
+          <p style="color:var(--muted); font-size:0.9rem;">{post.data.description}</p>
+        </a>
+      </li>
+    ))}
+  </ul>
+</Base>

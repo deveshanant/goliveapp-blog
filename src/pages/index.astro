@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+
+const posts = (await getCollection('blog')).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<Base title="GoLiveApp — DevOps & SRE Guides">
+  <section class="hero">
+    <h1>Ship with confidence.</h1>
+    <p>Practical DevOps and SRE guides from engineers who've been paged at 2am.</p>
+  </section>
+
+  <section class="posts">
+    <h2>Latest Posts</h2>
+    <ul>
+      {posts.map(post => (
+        <li>
+          <a href={`/blog/${post.slug}`}>
+            <h3>{post.data.title}</h3>
+            <p class="desc">{post.data.description}</p>
+            <div class="post-meta">
+              <time datetime={post.data.pubDate.toISOString()}>
+                {post.data.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })}
+              </time>
+              <div class="tags">
+                {post.data.tags.slice(0, 3).map(tag => <span class="tag">#{tag}</span>)}
+              </div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .hero {
+    padding: 3rem 0 2.5rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 2.5rem;
+  }
+  .hero h1 {
+    font-size: clamp(2rem, 5vw, 3rem);
+    color: #fff;
+    margin-bottom: 0.75rem;
+    line-height: 1.15;
+  }
+  .hero p {
+    font-size: 1.15rem;
+    color: var(--muted);
+    max-width: 520px;
+  }
+
+  .posts h2 {
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 1.5rem;
+  }
+  .posts ul { list-style: none; display: flex; flex-direction: column; gap: 0; }
+
+  .posts li a {
+    display: block;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    color: var(--text);
+    transition: padding-left 0.15s;
+  }
+  .posts li a:hover { padding-left: 0.5rem; }
+
+  .posts li a h3 {
+    font-size: 1.15rem;
+    color: #fff;
+    margin-bottom: 0.35rem;
+  }
+  .posts li a:hover h3 { color: var(--accent); }
+
+  .desc { color: var(--muted); font-size: 0.95rem; margin-bottom: 0.75rem; }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .post-meta time { font-size: 0.8rem; color: var(--muted); }
+  .tags { display: flex; gap: 0.35rem; flex-wrap: wrap; }
+  .tag {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.75rem;
+    color: var(--accent);
+  }
+</style>
