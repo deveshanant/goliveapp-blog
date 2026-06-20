@@ -58,11 +58,36 @@ git push -u origin main
 
 ## Step 4: Connect your custom domain
 
-1. In Cloudflare Pages → your project → **Custom domains**
-2. Click **Set up a custom domain**
-3. Enter `goliveapp.net` and click **Continue**
-4. Since your domain is already on Cloudflare, it will auto-add the DNS record. Click **Activate domain**.
-5. Also add `www.goliveapp.net` if you want the www version.
+1. Go to **Workers & Pages** in the left sidebar
+2. Click on your Pages project (e.g. `goliveapp-blog`)
+3. At the top of the project page, click the **Custom domains** tab
+4. Click **Set up a custom domain**
+5. Enter `goliveapp.net` and click **Continue**
+6. Since your domain is already on Cloudflare, it will auto-add the DNS record. Click **Activate domain**
+7. Repeat for `www.goliveapp.net` (add it as a second custom domain)
+
+> If you don't see the **Custom domains** tab, make sure you're inside the project (clicked into it), not on the Workers & Pages overview listing page.
+
+---
+
+## Step 4b: Redirect www → apex domain
+
+So that `www.goliveapp.net` always redirects to `goliveapp.net` (better for SEO):
+
+1. In Cloudflare dashboard, click on your domain → **Rules** → **Page Rules**
+2. Click **Create Page Rule**
+3. Configure:
+
+| Field | Value |
+|---|---|
+| URL | `www.goliveapp.net/*` |
+| Setting | Forwarding URL |
+| Status | 301 - Permanent Redirect |
+| Destination | `https://goliveapp.net/$1` |
+
+4. Click **Save and Deploy**
+
+The `$1` captures the full path so `www.goliveapp.net/blog/any-post` → `goliveapp.net/blog/any-post`. Cloudflare gives 3 free Page Rules per domain.
 
 Done — your blog is live at goliveapp.net.
 
