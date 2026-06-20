@@ -37,19 +37,22 @@ git push -u origin main
 
 ## Step 3: Connect to Cloudflare Pages
 
-1. Go to [dash.cloudflare.com](https://dash.cloudflare.com) → **Workers & Pages** → **Create**
-2. Click **Pages** → **Connect to Git**
-3. Authorize GitHub and select your `goliveapp-blog` repo
-4. Set build settings:
+1. Go to [dash.cloudflare.com](https://dash.cloudflare.com)
+2. In the left sidebar, click **Workers & Pages**
+3. Click the **Create** button (top right)
+4. You'll see two tabs — **Workers** and **Pages**. Click the **Pages** tab
+5. Click **Connect to Git**
+6. Authorize GitHub and select your `goliveapp-blog` repo
+7. Set build settings:
 
 | Setting | Value |
 |---|---|
 | Framework preset | Astro |
 | Build command | `npm run build` |
-| Build output directory | `dist` |
+| Build output directory | `dist    ` |
 | Node.js version | `18` (set in Environment Variables: `NODE_VERSION = 18`) |
 
-5. Click **Save and Deploy** — first deploy takes ~1 minute.
+8. Click **Save and Deploy** — first deploy takes ~1 minute.
 
 ---
 
