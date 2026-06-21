@@ -418,9 +418,9 @@ spec:
 
 ## Tools Worth Having
 
-- **[DigitalOcean Managed Kubernetes (DOKS)](https://www.digitalocean.com/?refcode=YOUR_REF_CODE)** — Managed control plane, straightforward pricing, good starting point if you want to cut EKS/GKE costs. *(affiliate link)*
-- **[Better Stack](https://betterstack.com/?ref=goliveapp)** — Uptime monitoring + on-call alerting. Set monitors on `/ready` so you catch issues before users do. *(affiliate link)*
-- **[Vultr Cloud Compute](https://www.vultr.com/?ref=YOUR_REF_CODE)** — Cheap VMs and managed K8s for full control at low cost. *(affiliate link)*
+- **[DigitalOcean Managed Kubernetes (DOKS)](https://m.do.co/c/07d0fb333ff1)** — Managed control plane, straightforward pricing, good starting point if you want to cut EKS/GKE costs. *(affiliate link)*
+- **[Better Stack](https://betterstack.com/?ref=b-i43z)** — Uptime monitoring + on-call alerting. Set monitors on `/ready` so you catch issues before users do. *(affiliate link)*
+- **[Vultr Cloud Compute](https://www.vultr.com/?ref=9907963)** — Cheap VMs and managed K8s for full control at low cost. *(affiliate link)*
 
 ---
 
