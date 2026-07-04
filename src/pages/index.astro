@@ -12,6 +12,51 @@ const posts = (await getCollection('blog')).sort(
     <p>Practical DevOps and SRE guides from engineers who've been paged at 2am.</p>
   </section>
 
+  <section class="about">
+    <h2>What GoLiveApp covers</h2>
+    <p>
+      GoLiveApp publishes in-depth technical guides for DevOps engineers and SREs running production
+      systems on Kubernetes. Each post focuses on a specific operational problem — zero-downtime
+      deployments, cluster resilience, incident response, cost optimization — and walks through
+      real configurations you can apply directly.
+    </p>
+    <p>
+      These guides assume you're already running Kubernetes in production, not learning it for the
+      first time. No hello-world examples. No theory without working YAML. Every post includes the
+      failure modes, the edge cases, and the production gotchas that official docs leave out.
+    </p>
+    <div class="topics">
+      <div class="topic">
+        <span class="topic-icon">⚙</span>
+        <div>
+          <strong>Kubernetes Operations</strong>
+          <p>Rolling updates, probes, graceful shutdown, HPA, PodDisruptionBudgets, topology spread</p>
+        </div>
+      </div>
+      <div class="topic">
+        <span class="topic-icon">☁</span>
+        <div>
+          <strong>AWS EKS</strong>
+          <p>Cluster upgrades, rollbacks, managed node groups, Fargate, Auto Mode</p>
+        </div>
+      </div>
+      <div class="topic">
+        <span class="topic-icon">📊</span>
+        <div>
+          <strong>SRE Practices</strong>
+          <p>SLOs, error budgets, on-call runbooks, incident response, observability</p>
+        </div>
+      </div>
+      <div class="topic">
+        <span class="topic-icon">💰</span>
+        <div>
+          <strong>Cost Optimization</strong>
+          <p>Spot instances, resource right-sizing, Karpenter, namespace quotas</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="posts">
     <h2>Latest Posts</h2>
     <ul>
@@ -62,6 +107,57 @@ const posts = (await getCollection('blog')).sort(
     font-size: 1.15rem;
     color: var(--muted);
     max-width: 520px;
+  }
+
+  .about {
+    margin-bottom: 3rem;
+    padding-bottom: 2.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .about h2 {
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .about > p {
+    color: var(--muted);
+    font-size: 0.975rem;
+    margin-bottom: 1rem;
+    max-width: 640px;
+    line-height: 1.75;
+  }
+  .topics {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+  }
+  @media (max-width: 520px) { .topics { grid-template-columns: 1fr; } }
+  .topic {
+    display: flex;
+    gap: 0.75rem;
+    align-items: flex-start;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.9rem 1rem;
+  }
+  .topic-icon {
+    font-size: 1.1rem;
+    margin-top: 0.1rem;
+    flex-shrink: 0;
+  }
+  .topic strong {
+    display: block;
+    font-size: 0.9rem;
+    color: var(--accent2);
+    margin-bottom: 0.2rem;
+  }
+  .topic p {
+    font-size: 0.82rem;
+    color: var(--muted);
+    margin: 0;
+    line-height: 1.5;
   }
 
   .posts h2 {

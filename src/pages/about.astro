@@ -1,0 +1,92 @@
+---
+import Base from '../layouts/Base.astro';
+---
+<Base title="About GoLiveApp" description="GoLiveApp publishes practical DevOps and SRE guides for engineers running Kubernetes in production.">
+  <article class="about-page">
+    <h1>About GoLiveApp</h1>
+
+    <p>
+      GoLiveApp is a technical blog for DevOps engineers and SREs who run production systems on
+      Kubernetes. Every guide here is written to solve a specific operational problem — not to
+      introduce concepts.
+    </p>
+
+    <h2>What we publish</h2>
+    <p>
+      Production Kubernetes is full of gaps between "the docs say it works" and "it works at 3am
+      under load with real traffic." GoLiveApp covers those gaps: the YAML settings most teams skip,
+      the failure modes that only show up at scale, and the operational patterns that separate
+      stable systems from ones that page you on weekends.
+    </p>
+
+    <h2>Topics</h2>
+    <ul>
+      <li><strong>Kubernetes deployments</strong> — rolling updates, zero-downtime configuration, probes, graceful shutdown</li>
+      <li><strong>Cluster resilience</strong> — Pod Disruption Budgets, topology spread, node affinity, taints and tolerations</li>
+      <li><strong>AWS EKS operations</strong> — cluster upgrades, rollbacks, managed node groups, Fargate, Auto Mode</li>
+      <li><strong>Autoscaling</strong> — HPA, Cluster Autoscaler, Karpenter, cost-aware scaling</li>
+      <li><strong>SRE practices</strong> — SLOs, error budgets, on-call runbooks, incident response</li>
+      <li><strong>Cost optimization</strong> — Spot instances, resource right-sizing, namespace quotas</li>
+      <li><strong>Observability</strong> — metrics, logs, traces, alerting, dashboards</li>
+    </ul>
+
+    <h2>Who this is for</h2>
+    <p>
+      Engineers who are already running Kubernetes and want to run it better. These guides assume
+      familiarity with Kubernetes basics — pods, deployments, services. They don't explain what a
+      container is.
+    </p>
+
+    <h2>Affiliate disclosure</h2>
+    <p>
+      Some posts contain affiliate links to tools and services we recommend. If you click a link and
+      make a purchase, we may earn a commission at no extra cost to you. We only link to tools
+      that are genuinely useful for the topic being covered. See our
+      <a href="/privacy-policy">Privacy Policy</a> for more details.
+    </p>
+
+    <h2>Contact</h2>
+    <p>
+      Questions, corrections, or topic suggestions:
+      <a href="mailto:devesh.anant@gmail.com">devesh.anant@gmail.com</a>
+    </p>
+  </article>
+</Base>
+
+<style>
+  .about-page {
+    max-width: 680px;
+  }
+  .about-page h1 {
+    font-size: 2rem;
+    color: #fff;
+    margin-bottom: 1.5rem;
+  }
+  .about-page h2 {
+    font-size: 1.2rem;
+    color: var(--accent2);
+    margin: 2rem 0 0.6rem;
+  }
+  .about-page p {
+    color: var(--muted);
+    font-size: 0.975rem;
+    line-height: 1.75;
+    margin-bottom: 0.9rem;
+  }
+  .about-page ul {
+    list-style: none;
+    margin: 0.5rem 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  .about-page li {
+    color: var(--muted);
+    font-size: 0.95rem;
+    padding-left: 1rem;
+    border-left: 2px solid var(--accent);
+    line-height: 1.6;
+  }
+  .about-page li strong { color: var(--accent); }
+  .about-page a { color: var(--accent2); text-decoration: underline; }
+</style>
