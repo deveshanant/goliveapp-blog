@@ -54,18 +54,49 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
       <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
     </div>
     -->
+
+    <section class="comments">
+      <h2>Comments</h2>
+      <script is:inline
+        src="https://giscus.app/client.js"
+        data-repo="deveshanant/goliveapp-blog"
+        data-repo-id="R_kgDOTAGqQg"
+        data-category="Announcements"
+        data-category-id="DIC_kwDOTAGqQs4DAeN9"
+        data-mapping="pathname"
+        data-strict="0"
+        data-reactions-enabled="1"
+        data-emit-metadata="0"
+        data-input-position="bottom"
+        data-theme="dark"
+        data-lang="en"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </section>
   </article>
 </Base>
 
 <style>
   .post-header {
     margin-bottom: 2.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border);
+    padding: 2rem 1.75rem;
+    background: linear-gradient(135deg, rgba(110,231,183,0.05) 0%, rgba(129,140,248,0.08) 100%);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+  .post-header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--grad);
   }
   .meta {
     color: var(--muted);
-    font-size: 0.875rem;
+    font-size: 0.85rem;
     margin-bottom: 0.75rem;
     display: flex;
     gap: 0.5rem;
@@ -75,7 +106,10 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
     font-size: clamp(1.6rem, 4vw, 2.2rem);
     line-height: 1.25;
     margin-bottom: 0.75rem;
-    color: #fff;
+    background: linear-gradient(135deg, #fff 40%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
   .description {
     color: var(--muted);
@@ -84,12 +118,12 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
   }
   .tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
   .tag {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 4px;
-    padding: 0.15rem 0.5rem;
-    font-size: 0.78rem;
-    color: var(--accent);
+    background: rgba(129,140,248,0.1);
+    border: 1px solid rgba(129,140,248,0.25);
+    border-radius: 20px;
+    padding: 0.15rem 0.6rem;
+    font-size: 0.75rem;
+    color: var(--accent2);
   }
 
   .ad-slot {
@@ -109,14 +143,24 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
   .prose :global(h2) {
     font-size: 1.5rem;
     margin: 2.5rem 0 1rem;
-    color: #fff;
+    background: linear-gradient(90deg, var(--accent) 0%, var(--accent2) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     border-left: 3px solid var(--accent);
     padding-left: 0.75rem;
   }
   .prose :global(h3) {
     font-size: 1.15rem;
     margin: 1.75rem 0 0.75rem;
-    color: var(--accent2);
+    color: var(--accent3);
+  }
+  .prose :global(img) {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin: 1.5rem 0;
+    border: 1px solid var(--border);
   }
   .prose :global(p) { margin-bottom: 1.2rem; }
   .prose :global(ul), .prose :global(ol) {
@@ -183,4 +227,19 @@ const formattedDate = pubDate.toLocaleDateString('en-US', { year: 'numeric', mon
     margin: 2.5rem 0;
   }
   .prose :global(input[type="checkbox"]) { margin-right: 0.5rem; }
+
+  .comments {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(90deg, var(--accent2), var(--accent3), transparent) 1;
+  }
+  .comments h2 {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+    background: var(--grad2);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
 </style>

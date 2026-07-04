@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="hdr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6ee7b7"/><stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="310" rx="12" fill="#151824" stroke="#252838" stroke-width="1.5"/>
+  <rect x="0" y="0" width="760" height="4" rx="2" fill="url(#hdr)"/>
+
+  <text x="380" y="32" text-anchor="middle" font-size="14" font-weight="700" fill="url(#hdr)" letter-spacing="1">CLUSTER RESILIENCE CHECKLIST</text>
+  <text x="380" y="48" text-anchor="middle" font-size="10" fill="#94a3b8">Scheduling and disruption controls · apply to every production workload</text>
+
+  <!-- === LEFT COLUMN === -->
+
+  <!-- Item 1: PDB -->
+  <rect x="20" y="62" width="350" height="54" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="20" y="62" width="4" height="54" rx="2" fill="#6ee7b7"/>
+  <circle cx="52" cy="89" r="14" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="52" y="94" text-anchor="middle" font-size="14" fill="#6ee7b7">1</text>
+  <text x="76" y="83" font-size="11" font-weight="600" fill="#e2e8f0">Pod Disruption Budget</text>
+  <text x="76" y="99" font-size="9" fill="#94a3b8">minAvailable or maxUnavailable · every multi-replica deployment</text>
+  <rect x="318" y="72" width="46" height="16" rx="8" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="341" y="84" text-anchor="middle" font-size="8" fill="#6ee7b7">Critical</text>
+
+  <!-- Item 2: Anti-Affinity -->
+  <rect x="20" y="126" width="350" height="54" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="20" y="126" width="4" height="54" rx="2" fill="#818cf8"/>
+  <circle cx="52" cy="153" r="14" fill="#1a1830" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="52" y="158" text-anchor="middle" font-size="14" fill="#818cf8">2</text>
+  <text x="76" y="147" font-size="11" font-weight="600" fill="#e2e8f0">Pod Anti-Affinity</text>
+  <text x="76" y="163" font-size="9" fill="#94a3b8">required or preferred · topologyKey: kubernetes.io/hostname</text>
+
+  <!-- Item 3: Topology Spread -->
+  <rect x="20" y="190" width="350" height="54" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="20" y="190" width="4" height="54" rx="2" fill="#f472b6"/>
+  <circle cx="52" cy="217" r="14" fill="#2a0f1f" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="52" y="222" text-anchor="middle" font-size="14" fill="#f472b6">3</text>
+  <text x="76" y="211" font-size="11" font-weight="600" fill="#e2e8f0">Topology Spread Constraints</text>
+  <text x="76" y="227" font-size="9" fill="#94a3b8">maxSkew: 1 · spread across zones · DoNotSchedule</text>
+  <rect x="318" y="200" width="46" height="16" rx="8" fill="#2a0f1f" stroke="#f472b6" stroke-width="1"/>
+  <text x="341" y="212" text-anchor="middle" font-size="8" fill="#f472b6">Critical</text>
+
+  <!-- === RIGHT COLUMN === -->
+
+  <!-- Item 4: Node Affinity -->
+  <rect x="390" y="62" width="350" height="54" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="62" width="4" height="54" rx="2" fill="#f59e0b"/>
+  <circle cx="422" cy="89" r="14" fill="#2a1f00" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="422" y="94" text-anchor="middle" font-size="14" fill="#f59e0b">4</text>
+  <text x="446" y="83" font-size="11" font-weight="600" fill="#e2e8f0">Node Affinity + Taints</text>
+  <text x="446" y="99" font-size="9" fill="#94a3b8">Isolate GPU, spot, infra nodes · prevent noisy-neighbour issues</text>
+
+  <!-- Item 5: Resource Quotas -->
+  <rect x="390" y="126" width="350" height="54" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="126" width="4" height="54" rx="2" fill="#818cf8"/>
+  <circle cx="422" cy="153" r="14" fill="#1a1830" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="422" y="158" text-anchor="middle" font-size="14" fill="#818cf8">5</text>
+  <text x="446" y="147" font-size="11" font-weight="600" fill="#e2e8f0">Resource Quotas per Namespace</text>
+  <text x="446" y="163" font-size="9" fill="#94a3b8">Caps on CPU, memory, pods · pair with LimitRange defaults</text>
+
+  <!-- Item 6: LimitRange -->
+  <rect x="390" y="190" width="350" height="54" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="190" width="4" height="54" rx="2" fill="#6ee7b7"/>
+  <circle cx="422" cy="217" r="14" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="422" y="222" text-anchor="middle" font-size="14" fill="#6ee7b7">6</text>
+  <text x="446" y="211" font-size="11" font-weight="600" fill="#e2e8f0">LimitRange Defaults</text>
+  <text x="446" y="227" font-size="9" fill="#94a3b8">Default requests/limits on containers · no unbounded pods</text>
+
+  <!-- Bottom bar -->
+  <rect x="20" y="258" width="720" height="38" rx="8" fill="#1a1d27" stroke="#252838"/>
+  <text x="380" y="274" text-anchor="middle" font-size="10" font-weight="600" fill="url(#hdr)">All 6 = cluster stays resilient through node failures, zone outages, and maintenance</text>
+  <text x="380" y="289" text-anchor="middle" font-size="9" fill="#94a3b8">PDB  ·  Anti-affinity  ·  Topology spread  ·  Node placement  ·  Resource guardrails</text>
+</svg>

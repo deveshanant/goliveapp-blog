@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 380" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="hdr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6ee7b7"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="g2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#818cf8"/>
+      <stop offset="100%" stop-color="#f472b6"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="380" rx="12" fill="#151824" stroke="#252838" stroke-width="1.5"/>
+
+  <!-- Top accent bar -->
+  <rect x="0" y="0" width="760" height="4" rx="2" fill="url(#hdr)"/>
+
+  <!-- Title -->
+  <text x="380" y="36" text-anchor="middle" font-size="15" font-weight="700" fill="url(#hdr)" letter-spacing="1">PRE-DEPLOY CHECKLIST</text>
+  <text x="380" y="52" text-anchor="middle" font-size="10" fill="#94a3b8">Zero-downtime Kubernetes deployment · verify all 8 before shipping</text>
+
+  <!-- ===== LEFT COLUMN ===== -->
+
+  <!-- Item 1 -->
+  <rect x="30" y="70" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="30" y="70" width="4" height="52" rx="2" fill="#6ee7b7"/>
+  <circle cx="62" cy="96" r="14" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="62" y="101" text-anchor="middle" font-size="14" fill="#6ee7b7">1</text>
+  <text x="86" y="90" font-size="11" font-weight="600" fill="#e2e8f0">Rolling Update Strategy</text>
+  <text x="86" y="107" font-size="9" fill="#94a3b8">maxUnavailable: 0  ·  maxSurge: 1</text>
+  <rect x="314" y="82" width="50" height="16" rx="8" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="339" y="94" text-anchor="middle" font-size="8" fill="#6ee7b7">Critical</text>
+
+  <!-- Item 2 -->
+  <rect x="30" y="132" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="30" y="132" width="4" height="52" rx="2" fill="#f59e0b"/>
+  <circle cx="62" cy="158" r="14" fill="#2a1f00" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="62" y="163" text-anchor="middle" font-size="14" fill="#f59e0b">2</text>
+  <text x="86" y="152" font-size="11" font-weight="600" fill="#e2e8f0">Startup Probe</text>
+  <text x="86" y="169" font-size="9" fill="#94a3b8">failureThreshold × periodSeconds ≥ worst-case boot time</text>
+
+  <!-- Item 3 -->
+  <rect x="30" y="194" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="30" y="194" width="4" height="52" rx="2" fill="#818cf8"/>
+  <circle cx="62" cy="220" r="14" fill="#1a1830" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="62" y="225" text-anchor="middle" font-size="14" fill="#818cf8">3</text>
+  <text x="86" y="214" font-size="11" font-weight="600" fill="#e2e8f0">Readiness Probe → Real Check</text>
+  <text x="86" y="231" font-size="9" fill="#94a3b8">/ready must query DB, cache — not just return 200</text>
+
+  <!-- Item 4 -->
+  <rect x="30" y="256" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="30" y="256" width="4" height="52" rx="2" fill="#f472b6"/>
+  <circle cx="62" cy="282" r="14" fill="#2a0f1f" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="62" y="287" text-anchor="middle" font-size="14" fill="#f472b6">4</text>
+  <text x="86" y="276" font-size="11" font-weight="600" fill="#e2e8f0">preStop Sleep</text>
+  <text x="86" y="293" font-size="9" fill="#94a3b8">lifecycle.preStop: sleep 5  ·  avoids race with kube-proxy</text>
+
+  <!-- ===== RIGHT COLUMN ===== -->
+
+  <!-- Item 5 -->
+  <rect x="390" y="70" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="70" width="4" height="52" rx="2" fill="#6ee7b7"/>
+  <circle cx="422" cy="96" r="14" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="422" y="101" text-anchor="middle" font-size="14" fill="#6ee7b7">5</text>
+  <text x="446" y="90" font-size="11" font-weight="600" fill="#e2e8f0">terminationGracePeriodSeconds</text>
+  <text x="446" y="107" font-size="9" fill="#94a3b8">Set to 60s+  ·  must exceed app drain timeout</text>
+  <rect x="674" y="82" width="50" height="16" rx="8" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="699" y="94" text-anchor="middle" font-size="8" fill="#6ee7b7">Critical</text>
+
+  <!-- Item 6 -->
+  <rect x="390" y="132" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="132" width="4" height="52" rx="2" fill="#818cf8"/>
+  <circle cx="422" cy="158" r="14" fill="#1a1830" stroke="#818cf8" stroke-width="1.5"/>
+  <text x="422" y="163" text-anchor="middle" font-size="14" fill="#818cf8">6</text>
+  <text x="446" y="152" font-size="11" font-weight="600" fill="#e2e8f0">SIGTERM Handler in App</text>
+  <text x="446" y="169" font-size="9" fill="#94a3b8">server.close() → db.end() → process.exit(0)</text>
+
+  <!-- Item 7 -->
+  <rect x="390" y="194" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="194" width="4" height="52" rx="2" fill="#f59e0b"/>
+  <circle cx="422" cy="220" r="14" fill="#2a1f00" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="422" y="225" text-anchor="middle" font-size="14" fill="#f59e0b">7</text>
+  <text x="446" y="214" font-size="11" font-weight="600" fill="#e2e8f0">Resource Requests &amp; Limits</text>
+  <text x="446" y="231" font-size="9" fill="#94a3b8">Based on kubectl top profiling — not guessed</text>
+
+  <!-- Item 8 -->
+  <rect x="390" y="256" width="340" height="52" rx="8" fill="#1e2235" stroke="#252838"/>
+  <rect x="390" y="256" width="4" height="52" rx="2" fill="#f472b6"/>
+  <circle cx="422" cy="282" r="14" fill="#2a0f1f" stroke="#f472b6" stroke-width="1.5"/>
+  <text x="422" y="287" text-anchor="middle" font-size="14" fill="#f472b6">8</text>
+  <text x="446" y="276" font-size="11" font-weight="600" fill="#e2e8f0">HPA with minReplicas: 2</text>
+  <text x="446" y="293" font-size="9" fill="#94a3b8">CPU target 60% · memory 70% · scaleDown window 120s</text>
+
+  <!-- Bottom summary bar -->
+  <rect x="30" y="324" width="700" height="40" rx="8" fill="#1a1d27" stroke="#252838"/>
+  <text x="380" y="340" text-anchor="middle" font-size="10" font-weight="600" fill="url(#hdr)">All 8 checks = zero dropped requests during rolling deploys</text>
+  <text x="380" y="355" text-anchor="middle" font-size="9" fill="#94a3b8">Rolling update  ·  Probes  ·  Graceful shutdown  ·  Resource limits  ·  HPA autoscaling</text>
+</svg>

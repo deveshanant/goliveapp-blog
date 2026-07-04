@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 290" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="hdr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6ee7b7"/><stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+    <marker id="ar" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#f87171"/>
+    </marker>
+    <marker id="ag" markerWidth="8" markerHeight="8" refX="6" refY="3" orient="auto">
+      <path d="M0,0 L0,6 L7,3 z" fill="#6ee7b7"/>
+    </marker>
+  </defs>
+
+  <rect width="760" height="290" rx="12" fill="#151824" stroke="#252838" stroke-width="1.5"/>
+  <text x="380" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="url(#hdr)" letter-spacing="1">POD DISRUPTION BUDGET — NODE DRAIN</text>
+
+  <line x1="380" y1="38" x2="380" y2="278" stroke="#252838" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- ===== LEFT: WITHOUT PDB ===== -->
+  <text x="190" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#f87171">✗  Without PDB</text>
+
+  <!-- 3 nodes -->
+  <!-- Node 1 -->
+  <rect x="25" y="65" width="90" height="80" rx="7" fill="#1e2235" stroke="#252838"/>
+  <text x="70" y="80" text-anchor="middle" font-size="9" fill="#94a3b8">Node 1</text>
+  <rect x="35" y="85" width="70" height="28" rx="5" fill="#1a1830" stroke="#818cf8" stroke-width="1.2"/>
+  <text x="70" y="103" text-anchor="middle" font-size="9" fill="#818cf8">pod-a</text>
+  <text x="70" y="158" text-anchor="middle" font-size="8" fill="#f59e0b">⬡ draining</text>
+
+  <!-- Node 2 -->
+  <rect x="130" y="65" width="90" height="80" rx="7" fill="#1e2235" stroke="#252838"/>
+  <text x="175" y="80" text-anchor="middle" font-size="9" fill="#94a3b8">Node 2</text>
+  <rect x="140" y="85" width="70" height="28" rx="5" fill="#1a1830" stroke="#818cf8" stroke-width="1.2"/>
+  <text x="175" y="103" text-anchor="middle" font-size="9" fill="#818cf8">pod-b</text>
+
+  <!-- Node 3 -->
+  <rect x="235" y="65" width="90" height="80" rx="7" fill="#1e2235" stroke="#252838"/>
+  <text x="280" y="80" text-anchor="middle" font-size="9" fill="#94a3b8">Node 3</text>
+  <rect x="245" y="85" width="70" height="28" rx="5" fill="#1a1830" stroke="#818cf8" stroke-width="1.2"/>
+  <text x="280" y="103" text-anchor="middle" font-size="9" fill="#818cf8">pod-c</text>
+
+  <!-- Drain arrow — takes all -->
+  <text x="175" y="175" text-anchor="middle" font-size="9" fill="#f87171">kubectl drain node-1</text>
+  <path d="M 70 145 L 70 168" stroke="#f87171" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+  <path d="M 175 145 L 175 168" stroke="#f87171" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+  <path d="M 280 145 L 280 168" stroke="#f87171" stroke-width="1.5" fill="none" marker-end="url(#ar)"/>
+
+  <!-- All evicted -->
+  <rect x="25" y="175" width="300" height="34" rx="6" fill="#2a0f0f" stroke="#f87171" stroke-width="1"/>
+  <text x="175" y="189" text-anchor="middle" font-size="9" fill="#f87171" font-weight="600">All 3 pods evicted simultaneously</text>
+  <text x="175" y="202" text-anchor="middle" font-size="9" fill="#94a3b8">0/3 available · Service down</text>
+
+  <!-- Sad label -->
+  <rect x="25" y="220" width="300" height="22" rx="5" fill="#1a1010" stroke="#252838"/>
+  <text x="175" y="235" text-anchor="middle" font-size="9" fill="#94a3b8">No floor on disruption — scheduler evicts freely</text>
+
+  <!-- ===== RIGHT: WITH PDB ===== -->
+  <text x="570" y="52" text-anchor="middle" font-size="11" font-weight="700" fill="#6ee7b7">✓  With PDB (minAvailable: 2)</text>
+
+  <!-- 3 nodes right side -->
+  <!-- Node 1 — draining -->
+  <rect x="400" y="65" width="90" height="80" rx="7" fill="#1e1a1a" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="445" y="80" text-anchor="middle" font-size="9" fill="#f59e0b">Node 1 ⬡</text>
+  <rect x="410" y="85" width="70" height="28" rx="5" fill="#2a1a00" stroke="#f59e0b" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="445" y="103" text-anchor="middle" font-size="9" fill="#f59e0b">pod-a</text>
+  <text x="445" y="155" text-anchor="middle" font-size="8" fill="#f59e0b">evicted (1 allowed)</text>
+
+  <!-- Node 2 — healthy -->
+  <rect x="505" y="65" width="90" height="80" rx="7" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="550" y="80" text-anchor="middle" font-size="9" fill="#6ee7b7">Node 2 ✓</text>
+  <rect x="515" y="85" width="70" height="28" rx="5" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.2"/>
+  <text x="550" y="103" text-anchor="middle" font-size="9" fill="#6ee7b7">pod-b</text>
+
+  <!-- Node 3 — healthy -->
+  <rect x="610" y="65" width="90" height="80" rx="7" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.5"/>
+  <text x="655" y="80" text-anchor="middle" font-size="9" fill="#6ee7b7">Node 3 ✓</text>
+  <rect x="620" y="85" width="70" height="28" rx="5" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.2"/>
+  <text x="655" y="103" text-anchor="middle" font-size="9" fill="#6ee7b7">pod-c</text>
+
+  <!-- Only node 1 drained -->
+  <path d="M 445 145 L 445 168" stroke="#f59e0b" stroke-width="1.5" fill="none" marker-end="url(#ag)"/>
+  <text x="570" y="175" text-anchor="middle" font-size="9" fill="#6ee7b7">PDB blocks further evictions</text>
+
+  <!-- Result good -->
+  <rect x="400" y="175" width="315" height="34" rx="6" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="557" y="189" text-anchor="middle" font-size="9" fill="#6ee7b7" font-weight="600">Only 1 pod evicted — 2/3 still running</text>
+  <text x="557" y="202" text-anchor="middle" font-size="9" fill="#94a3b8">minAvailable: 2 enforced · Service stays up</text>
+
+  <!-- Config reminder -->
+  <rect x="400" y="220" width="315" height="22" rx="5" fill="#1a1830" stroke="#252838"/>
+  <text x="557" y="235" text-anchor="middle" font-size="9" fill="#94a3b8">spec: minAvailable: 2 · selector: matchLabels: app: my-app</text>
+
+  <!-- Bottom note -->
+  <rect x="20" y="254" width="720" height="24" rx="5" fill="#1a1d27" stroke="#252838"/>
+  <text x="380" y="270" text-anchor="middle" font-size="9" fill="#94a3b8">PDB applies to voluntary disruptions only: node drains, cluster upgrades, evictions · Not applicable to node crashes or OOM kills</text>
+</svg>

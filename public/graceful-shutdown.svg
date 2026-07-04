@@ -1,0 +1,111 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 310" font-family="-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif">
+  <defs>
+    <linearGradient id="hdr" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#6ee7b7"/>
+      <stop offset="100%" stop-color="#818cf8"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="760" height="310" rx="12" fill="#151824" stroke="#252838" stroke-width="1.5"/>
+
+  <!-- Title -->
+  <text x="380" y="28" text-anchor="middle" font-size="13" font-weight="700" fill="url(#hdr)" letter-spacing="1">GRACEFUL SHUTDOWN SEQUENCE</text>
+
+  <!-- Section labels -->
+  <text x="190" y="50" text-anchor="middle" font-size="11" fill="#f87171" font-weight="600">WITHOUT preStop sleep ✗</text>
+  <text x="570" y="50" text-anchor="middle" font-size="11" fill="#6ee7b7" font-weight="600">WITH preStop sleep 5s ✓</text>
+  <line x1="380" y1="40" x2="380" y2="300" stroke="#252838" stroke-width="1.5" stroke-dasharray="6,4"/>
+
+  <!-- ===== LEFT: WITHOUT preStop ===== -->
+  <!-- Timeline -->
+  <line x1="50" y1="80" x2="350" y2="80" stroke="#252838" stroke-width="1.5"/>
+
+  <!-- t=0 marker -->
+  <line x1="60" y1="75" x2="60" y2="85" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="60" y="72" text-anchor="middle" font-size="8" fill="#94a3b8">t=0</text>
+
+  <!-- Events on timeline - bad -->
+  <!-- Step 1: deletion -->
+  <circle cx="90" cy="80" r="5" fill="#f87171"/>
+  <text x="90" y="100" text-anchor="middle" font-size="9" fill="#94a3b8">Pod</text>
+  <text x="90" y="111" text-anchor="middle" font-size="9" fill="#94a3b8">deleted</text>
+
+  <!-- Step 2: SIGTERM + remove from LB (same time!) -->
+  <circle cx="170" cy="80" r="5" fill="#f87171"/>
+  <text x="170" y="100" text-anchor="middle" font-size="9" fill="#f87171">SIGTERM</text>
+  <circle cx="175" cy="80" r="5" fill="#f472b6" opacity="0.8"/>
+  <text x="175" y="111" text-anchor="middle" font-size="9" fill="#f472b6">LB update</text>
+  <rect x="140" y="115" width="70" height="18" rx="3" fill="#2a0f0f" stroke="#f87171" stroke-width="1"/>
+  <text x="175" y="127" text-anchor="middle" font-size="8" fill="#f87171">same time!</text>
+
+  <!-- Dropped requests arrow -->
+  <path d="M 175 80 L 230 55" stroke="#f87171" stroke-width="1.2" stroke-dasharray="3,2"/>
+  <rect x="228" y="42" width="90" height="20" rx="4" fill="#2a0f0f" stroke="#f87171" stroke-width="1"/>
+  <text x="273" y="56" text-anchor="middle" font-size="9" fill="#f87171">✕ Requests dropped</text>
+
+  <!-- App exits -->
+  <circle cx="280" cy="80" r="5" fill="#f87171"/>
+  <text x="280" y="100" text-anchor="middle" font-size="9" fill="#94a3b8">App</text>
+  <text x="280" y="111" text-anchor="middle" font-size="9" fill="#94a3b8">exits</text>
+
+  <!-- Race condition callout -->
+  <rect x="40" y="140" width="320" height="55" rx="6" fill="#1a1010" stroke="#f87171" stroke-width="1" stroke-dasharray="4,3"/>
+  <text x="200" y="158" text-anchor="middle" font-size="10" fill="#f87171" font-weight="600">The Race Condition</text>
+  <text x="200" y="172" text-anchor="middle" font-size="9" fill="#94a3b8">kube-proxy propagates endpoint removal async.</text>
+  <text x="200" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">Traffic still hits pod while it's already shutting down.</text>
+
+  <!-- Step 3: SIGKILL -->
+  <rect x="40" y="208" width="320" height="30" rx="5" fill="#1a1010" stroke="#252838"/>
+  <text x="200" y="226" text-anchor="middle" font-size="9" fill="#94a3b8">After terminationGracePeriodSeconds → SIGKILL (force kill)</text>
+
+  <!-- ===== RIGHT: WITH preStop ===== -->
+  <line x1="410" y1="80" x2="720" y2="80" stroke="#252838" stroke-width="1.5"/>
+
+  <line x1="420" y1="75" x2="420" y2="85" stroke="#94a3b8" stroke-width="1.5"/>
+  <text x="420" y="72" text-anchor="middle" font-size="8" fill="#94a3b8">t=0</text>
+
+  <!-- Step 1: deletion -->
+  <circle cx="450" cy="80" r="5" fill="#6ee7b7"/>
+  <text x="450" y="100" text-anchor="middle" font-size="9" fill="#94a3b8">Pod</text>
+  <text x="450" y="111" text-anchor="middle" font-size="9" fill="#94a3b8">deleted</text>
+
+  <!-- preStop sleep starts -->
+  <rect x="470" y="70" width="80" height="20" rx="4" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1.2"/>
+  <text x="510" y="84" text-anchor="middle" font-size="9" fill="#6ee7b7">sleep 5s</text>
+  <line x1="550" y1="80" x2="550" y2="80"/>
+
+  <!-- LB update during sleep -->
+  <circle cx="515" cy="80" r="4" fill="#6ee7b7" opacity="0.6"/>
+  <path d="M 515 70 L 515 50" stroke="#6ee7b7" stroke-width="1" stroke-dasharray="3,2"/>
+  <rect x="465" y="35" width="100" height="16" rx="3" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="515" y="47" text-anchor="middle" font-size="8" fill="#6ee7b7">LB drains traffic</text>
+
+  <!-- SIGTERM after sleep -->
+  <circle cx="560" cy="80" r="5" fill="#818cf8"/>
+  <text x="560" y="100" text-anchor="middle" font-size="9" fill="#818cf8">SIGTERM</text>
+  <text x="560" y="111" text-anchor="middle" font-size="9" fill="#94a3b8">sent</text>
+
+  <!-- App drains -->
+  <rect x="570" y="70" width="90" height="20" rx="4" fill="#1a1830" stroke="#818cf8" stroke-width="1.2"/>
+  <text x="615" y="84" text-anchor="middle" font-size="9" fill="#818cf8">drain inflight</text>
+
+  <!-- App exits cleanly -->
+  <circle cx="670" cy="80" r="5" fill="#6ee7b7"/>
+  <text x="670" y="100" text-anchor="middle" font-size="9" fill="#6ee7b7">Clean</text>
+  <text x="670" y="111" text-anchor="middle" font-size="9" fill="#6ee7b7">exit ✓</text>
+
+  <!-- Success callout -->
+  <rect x="400" y="140" width="340" height="55" rx="6" fill="#0f2a1f" stroke="#6ee7b7" stroke-width="1"/>
+  <text x="570" y="158" text-anchor="middle" font-size="10" fill="#6ee7b7" font-weight="600">preStop Buys Time</text>
+  <text x="570" y="172" text-anchor="middle" font-size="9" fill="#94a3b8">sleep 5s runs before SIGTERM. Load balancers and</text>
+  <text x="570" y="184" text-anchor="middle" font-size="9" fill="#94a3b8">kube-proxy finish propagating the endpoint removal.</text>
+
+  <!-- Grace period -->
+  <rect x="400" y="208" width="340" height="30" rx="5" fill="#131c14" stroke="#252838"/>
+  <text x="570" y="226" text-anchor="middle" font-size="9" fill="#94a3b8">terminationGracePeriodSeconds: 60  ·  timeout safety net: 50s</text>
+
+  <!-- Bottom note -->
+  <rect x="40" y="256" width="680" height="36" rx="6" fill="#1a1d27" stroke="#252838"/>
+  <text x="380" y="270" text-anchor="middle" font-size="9" fill="#94a3b8">Config: lifecycle.preStop.exec.command: ["sh","-c","sleep 5"]  +  terminationGracePeriodSeconds: 60</text>
+  <text x="380" y="284" text-anchor="middle" font-size="9" fill="#94a3b8">Node.js: server.close() → await db.end() → process.exit(0)  ·  force exit timeout: 50_000ms</text>
+</svg>

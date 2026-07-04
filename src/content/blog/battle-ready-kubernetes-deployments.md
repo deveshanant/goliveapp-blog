@@ -29,6 +29,8 @@ Let's fix each one.
 
 The first thing to tune is how Kubernetes replaces pods during a deploy.
 
+![Rolling update illustration showing pods being replaced one at a time with zero downtime](/rolling-update.svg)
+
 ```yaml
 spec:
   strategy:
@@ -49,6 +51,8 @@ With a small replica count (2–3 pods), the default `25%` values round down unp
 ## 2. Probes: Startup, Readiness, Liveness
 
 Three probes, three different jobs. Don't confuse them.
+
+![Probe lifecycle diagram showing startup, readiness, and liveness probe sequence](/probe-lifecycle.svg)
 
 ### Startup Probe
 
@@ -116,7 +120,9 @@ app.get('/healthz', (req, res) => res.sendStatus(200));
 
 ## 3. Graceful Shutdown
 
-This is where most teams get burned. The sequence when Kubernetes deletes a pod looks deceptively simple:
+This is where most teams get burned.
+
+![Graceful shutdown sequence diagram comparing behavior with and without preStop sleep](/graceful-shutdown.svg) The sequence when Kubernetes deletes a pod looks deceptively simple:
 
 1. Pod marked for deletion
 2. Pod removed from service endpoints
@@ -404,6 +410,8 @@ spec:
 ---
 
 ## Pre-Deploy Checklist
+
+![Pre-deploy checklist infographic with all 8 items for zero-downtime Kubernetes deployments](/predeploy-checklist.svg)
 
 - [ ] `maxUnavailable: 0` in rolling update strategy
 - [ ] Startup probe configured with enough time for worst-case boot

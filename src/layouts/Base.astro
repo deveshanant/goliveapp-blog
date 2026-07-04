@@ -21,19 +21,25 @@ const { title, description = "DevOps and SRE guides for engineers who ship." } =
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2a2d3e;
+      --bg: #0d0f18;
+      --surface: #151824;
+      --border: #252838;
       --text: #e2e8f0;
       --muted: #94a3b8;
       --accent: #6ee7b7;
       --accent2: #818cf8;
+      --accent3: #f472b6;
+      --grad: linear-gradient(135deg, #6ee7b7 0%, #818cf8 100%);
+      --grad2: linear-gradient(135deg, #818cf8 0%, #f472b6 100%);
       --max-w: 720px;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(ellipse at 15% 40%, rgba(110,231,183,0.06) 0%, transparent 55%),
+        radial-gradient(ellipse at 85% 10%, rgba(129,140,248,0.07) 0%, transparent 50%),
+        var(--bg);
       color: var(--text);
       line-height: 1.7;
       font-size: 17px;
@@ -48,6 +54,17 @@ const { title, description = "DevOps and SRE guides for engineers who ship." } =
       display: flex;
       align-items: center;
       gap: 2rem;
+      position: relative;
+    }
+    nav::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: var(--grad);
+      opacity: 0.6;
     }
     nav .logo {
       display: flex;
@@ -55,7 +72,10 @@ const { title, description = "DevOps and SRE guides for engineers who ship." } =
       gap: 0.5rem;
       font-weight: 700;
       font-size: 1.1rem;
-      color: var(--accent);
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-decoration: none;
     }
     nav .logo img {
@@ -63,6 +83,12 @@ const { title, description = "DevOps and SRE guides for engineers who ship." } =
       width: auto;
     }
     nav .logo:hover { text-decoration: none; }
+    nav a:not(.logo) {
+      color: var(--muted);
+      font-size: 0.9rem;
+      transition: color 0.15s;
+    }
+    nav a:not(.logo):hover { color: var(--accent2); text-decoration: none; }
 
     main {
       max-width: var(--max-w);
@@ -76,7 +102,10 @@ const { title, description = "DevOps and SRE guides for engineers who ship." } =
       padding: 2rem;
       color: var(--muted);
       font-size: 0.875rem;
+      background: linear-gradient(180deg, transparent, rgba(129,140,248,0.03));
     }
+    footer p { color: var(--muted); }
+    footer strong { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
   </style>
 </head>
 <body>
